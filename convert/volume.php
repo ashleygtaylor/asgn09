@@ -1,66 +1,66 @@
 <?php
 
-function convert_to_gallons($value, $from_unit) {
-  switch($from_unit) {
+function convert_to_gallons($value, $fromUnit) {
+  switch($fromUnit) {
     case 'buckets':
       return $value * 4;
       break;
-    case 'feet':
-      return $value * 0.3048;
+    case 'butts':
+      return $value * 108;
       break;
-    case 'yards':
-      return $value * 0.9144;
+    case 'firkins':
+      return $value * 9;
       break;
-    case 'miles':
-      return $value * 1609.344;
+    case 'hogsheads':
+      return $value * 54;
       break;
-    case 'millimeters':
-      return $value * 0.001;
+    case 'pints':
+      return $value * 0.125;
       break;
     default:
       return "Unsupported unit.";
   }
 }
   
-function convert_from_gallons($value, $to_unit) {
-  switch($to_unit) {
+function convert_from_gallons($value, $toUnit) {
+  switch($toUnit) {
     case 'buckets':
       return $value / 4;
       break;
-    case 'feet':
-      return $value / 0.3048;
+    case 'butts':
+      return $value / 108;
       break;
-    case 'yards':
-      return $value / 0.9144;
+    case 'firkins':
+      return $value / 9;
       break;
-    case 'miles':
-      return $value / 1609.344;
+    case 'hogsheads':
+      return $value / 54;
       break;
-    case 'millimeters':
-      return $value / 0.001;
+    case 'pints':
+      return $value / 0.125;
       break;
     default:
       return "Unsupported unit.";
   }
 }
 
-function convert_volume($value, $from_unit, $to_unit) {
-  $gallon_value = convert_to_gallons($value, $from_unit);
-  $new_value = convert_from_gallons($gallon_value, $to_unit);
+function convert_liquids($value, $fromUnit, $toUnit) {
+  $gallon_value = convert_to_gallons($value, $fromUnit);
+  $new_value = convert_from_gallons($gallon_value, $toUnit);
   return $new_value;
 }
 
-$from_value = '';
-$from_unit = '';
-$to_unit = '';
-$to_value = '';
+$fromValue = '';
+$fromUnit = '';
+$toUnit = '';
+$toValue = '';
 
 if($_POST['submit']) {
-  $from_value = $_POST['from_value'];
-  $from_unit = $_POST['from_unit'];
-  $to_unit = $_POST['to_unit'];
+  $fromValue = $_POST['fromValue'];
+  $fromUnit = $_POST['fromUnit'];
+  $toUnit = $_POST['toUnit'];
   
-  $to_value = convert_volume($from_value, $from_unit, $to_unit);
+  $toValue = convert_liquids($fromValue, $fromUnit, $toUnit);
 }
 
 ?>
@@ -68,38 +68,38 @@ if($_POST['submit']) {
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Convert Volume</title>
+    <title>Convert liquids</title>
     <link href="styles.css" rel="stylesheet" type="text/css">
   </head>
   <body>
 
     <div id="main-content">
 
-      <h1>Convert Length</h1>
+      <h1>Convert Liquids</h1>
   
       <form action="" method="post">
         
         <div class="entry">
           <label>From:</label>&nbsp;
-          <input type="text" name="from_value" value="<?php echo $from_value; ?>" />&nbsp;
-          <select name="from_unit">
-            <option value="buckets"<?php if($from_unit == 'buckets') { echo " selected"; } ?>>buckets</option>
-            <option value="butts"<?php if($from_unit == 'butts') { echo " selected"; } ?>>butts</option>
-            <option value="yards"<?php if($from_unit == 'yards') { echo " selected"; } ?>>yards</option>
-            <option value="miles"<?php if($from_unit == 'miles') { echo " selected"; } ?>>miles</option>
-            <option value="millimeters"<?php if($from_unit == 'millimeters') { echo " selected"; } ?>>millimeters</option>
+          <input type="text" name="fromValue" value="<?php echo $fromValue; ?>" />&nbsp;
+          <select name="fromUnit">
+            <option value="buckets"<?php if($fromUnit == 'buckets') { echo " selected"; } ?>>buckets</option>
+            <option value="butts"<?php if($fromUnit == 'butts') { echo " selected"; } ?>>butts</option>
+            <option value="firkins"<?php if($fromUnit == 'firkins') { echo " selected"; } ?>>firkins</option>
+            <option value="hogsheads"<?php if($fromUnit == 'hogsheads') { echo " selected"; } ?>>hogsheads</option>
+            <option value="pints"<?php if($fromUnit == 'pints') { echo " selected"; } ?>>pints</option>
           </select>
         </div>
         
         <div class="entry">
           <label>To:</label>&nbsp;
-          <input type="text" name="to_value" value="<?php echo $to_value; ?>" />&nbsp;
-          <select name="to_unit">
-            <option value="buckets"<?php if($to_unit == 'buckets') { echo " selected"; } ?>>buckets</option>
-            <option value="feet"<?php if($to_unit == 'feet') { echo " selected"; } ?>>feet</option>
-            <option value="yards"<?php if($to_unit == 'yards') { echo " selected"; } ?>>yards</option>
-            <option value="miles"<?php if($to_unit == 'miles') { echo " selected"; } ?>>miles</option>
-            <option value="millimeters"<?php if($to_unit == 'millimeters') { echo " selected"; } ?>>millimeters</option>
+          <input type="text" name="toValue" value="<?php echo $toValue; ?>" />&nbsp;
+          <select name="toUnit">
+            <option value="buckets"<?php if($toUnit == 'buckets') { echo " selected"; } ?>>buckets</option>
+            <option value="butts"<?php if($toUnit == 'butts') { echo " selected"; } ?>>butts</option>
+            <option value="firkins"<?php if($toUnit == 'firkins') { echo " selected"; } ?>>firkins</option>
+            <option value="hogsheads"<?php if($toUnit == 'hogheads') { echo " selected"; } ?>>hogheads</option>
+            <option value="pints"<?php if($toUnit == 'pints') { echo " selected"; } ?>>pints</option>
           </select>
           
         </div>
